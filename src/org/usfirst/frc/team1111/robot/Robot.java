@@ -29,7 +29,7 @@ public class Robot extends IterativeRobot {
 	TalonSRX backLeft = new TalonSRX(54); //TODO: Configure
 	TalonSRX backRight = new TalonSRX(48); //TODO: Configure
 	
-	TalonSRX motor = new TalonSRX(62);
+//	TalonSRX motor = new TalonSRX(62);
 	
 	@Override
 	public void robotInit() {
@@ -37,7 +37,7 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putNumber("I-Gain:", i);
 		SmartDashboard.putNumber("D-Gain:", d);
 		SmartDashboard.putNumber("Desired Distance:", desDist);
-		backRight.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 200);
+		backRight.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, 0, 200);
 		pid.setOutputLimits(-1, 1);
 	}
 
@@ -68,11 +68,11 @@ public class Robot extends IterativeRobot {
 	 */
 	private void drive(double speed) {
 		speed *= 1; //Sets soft limit for motors
-//		frontLeft.set(ControlMode.PercentOutput, -speed);
-//		frontRight.set(ControlMode.PercentOutput, speed);
-//		backLeft.set(ControlMode.PercentOutput, -speed);
-//		backRight.set(ControlMode.PercentOutput, speed);
-		motor.set(ControlMode.PercentOutput, speed);
+		frontLeft.set(ControlMode.PercentOutput, -speed);
+		frontRight.set(ControlMode.PercentOutput, speed);
+		backLeft.set(ControlMode.PercentOutput, -speed);
+		backRight.set(ControlMode.PercentOutput, speed);
+//		motor.set(ControlMode.PercentOutput, speed);
 	}
 	
 	/**
